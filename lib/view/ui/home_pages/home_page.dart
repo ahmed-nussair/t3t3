@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:t3t3/view/ui/screen_util.dart';
 
 import 'product_item.dart';
 
@@ -11,25 +12,42 @@ List _categories = [
   'Camera',
 ];
 
-List _tabViews = [
-  Center(
-    child: Text('Electronics'),
-  ),
-  Center(
-    child: Text('Mobile'),
-  ),
-  Center(
-    child: Text('Fashion'),
-  ),
-  Center(
-    child: Text('Kids'),
-  ),
-  Center(
-    child: Text('Camera'),
-  ),
-  Center(
-    child: Text('Electronics'),
-  ),
+List _subCategories = [
+  {
+    'imageUrl': 'assets/all_sub_categories.png',
+    'title': 'All',
+    'onTapped': () {
+      print('tapped');
+    },
+  },
+  {
+    'imageUrl': 'https://i.ibb.co/pKWmpMT/tv-and-video.jpg',
+    'title': 'TV & Videos',
+    'onTapped': () {
+      print('tapped');
+    },
+  },
+  {
+    'imageUrl': 'https://i.ibb.co/v1Bbv0t/cameras.jpg',
+    'title': 'Cameras',
+    'onTapped': () {
+      print('tapped');
+    },
+  },
+  {
+    'imageUrl': 'https://i.ibb.co/TBkqBs2/headphones.jpg',
+    'title': 'Headphones',
+    'onTapped': () {
+      print('tapped');
+    },
+  },
+  {
+    'imageUrl': 'https://i.ibb.co/w7Sq0rd/home-audio.jpg',
+    'title': 'Home Audio',
+    'onTapped': () {
+      print('tapped');
+    },
+  }
 ];
 
 List _products = [
@@ -66,6 +84,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController _tabController;
   int _currentTabIndex = 0;
 
+  final ScreenUtil _screenUtil = ScreenUtil();
+
   @override
   void initState() {
     super.initState();
@@ -78,47 +98,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _screenUtil.init(context);
     return SafeArea(
         child: Scaffold(
-//        appBar: AppBar(
-//          title: Row(
-//            children: <Widget>[
-//              Padding(
-//                padding: const EdgeInsets.all(8.0),
-//                child: Icon(Icons.camera_alt),
-//              ),
-//              Expanded(
-//                child: Container(
-//                  padding: EdgeInsets.all(10),
-//                  decoration: BoxDecoration(
-//                    color: Colors.white,
-//                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
-//                  ),
-//                  child: Stack(
-//                    alignment: Alignment.center,
-//                    children: <Widget>[
-//                      Text(
-//                        'Search For a Product',
-//                        textAlign: TextAlign.center,
-//                        style: TextStyle(
-//                          color: Color(0xff6a6a6a),
-//                        ),
-//                      ),
-//                      Positioned(
-//                        right: 0.0,
-//                        bottom: 0.0,
-//                        top: 0.0,
-//                        child: Icon(Icons.search,
-//                          color: Color(0xff6a6a6a),
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-//                ),
-//              ),
-//            ],
-//          ),
-//        ),
       body: Scaffold(
         appBar: TabBar(
           isScrollable: true,
@@ -128,45 +110,94 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               _currentTabIndex = index;
             });
           },
-          tabs: List.generate(_categories.length, (index) {
-            return Tab(
-              child: Text(
-                '${_categories[index]}',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            );
-          }),
-        ),
-        body: TabBarView(
-          controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
-          children: List.generate(_categories.length, (index) {
-            return CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding: EdgeInsets.all(8),
-                  sliver: SliverGrid.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: .8,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    children: List.generate(_products.length, (index) {
-                      return ProductItem(
-                        title: _products[index]['title'],
-                        imageUrl: _products[index]['imageUrl'],
-                        price: _products[index]['price'],
-                        afterDiscount: _products[index]['afterDiscount'],
-                      );
-                    }),
+              tabs: List.generate(_categories.length, (index) {
+                return Tab(
+                  child: Text(
+                    '${_categories[index]}',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            );
-          }),
-        ),
-      ),
-    ));
+                );
+              }),
+            ),
+            body: TabBarView(
+              controller: _tabController,
+              physics: NeverScrollableScrollPhysics(),
+              children: List.generate(_categories.length, (index) {
+                return Scaffold(
+                  body: CustomScrollView(
+                    slivers: [
+                      SliverGrid.count(crossAxisCount: 4,
+                        children: List.generate(_subCategories.length, (index) {
+                          return Padding(
+                            padding: EdgeInsets.all(_screenUtil.setWidth(10)),
+                            child: Column(
+
+                              children: [
+                                Flexible(
+                                  flex: 5,
+                                  child: Container(
+                                    height: _screenUtil.setWidth(150),
+                                    width: _screenUtil.setWidth(150),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: _screenUtil.setHeight(1),
+                                        color: Colors.black,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                              _screenUtil.setHeight(100))),
+                                      image: index > 0 ? DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                          _subCategories[index]['imageUrl'],),
+                                      ) :
+                                      DecorationImage(
+                                        scale: _screenUtil.setWidth(20),
+                                        image: AssetImage(
+                                          _subCategories[index]['imageUrl'],),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 2,
+                                  child: Text(_subCategories[index]['title'],
+                                    style: TextStyle(
+                                        fontSize: _screenUtil.setSp(35),
+                                        color: Colors.black
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                      SliverPadding(
+                        padding: EdgeInsets.all(_screenUtil.setWidth(30)),
+                        sliver: SliverGrid.count(
+                          crossAxisCount: 2,
+                          childAspectRatio: .8,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
+                          children: List.generate(_products.length, (index) {
+                            return ProductItem(
+                              title: _products[index]['title'],
+                              imageUrl: _products[index]['imageUrl'],
+                              price: _products[index]['price'],
+                              afterDiscount: _products[index]['afterDiscount'],
+                            );
+                          }),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ),
+          ),
+        ));
   }
 }

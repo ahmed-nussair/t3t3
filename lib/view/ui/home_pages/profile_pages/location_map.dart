@@ -10,12 +10,14 @@ class LocationMap extends StatefulWidget {
   final double longitude;
   final String address;
   final bool editing;
+  final Function(double, double) onLocationSpecifiedOnMap;
 
   LocationMap(
       {@required this.latitude,
       @required this.longitude,
       @required this.address,
-      this.editing = false});
+      this.editing = false,
+      this.onLocationSpecifiedOnMap});
 
   @override
   _LocationMapState createState() => _LocationMapState();
@@ -56,26 +58,33 @@ class _LocationMapState extends State<LocationMap> {
     return new Scaffold(
       body: Column(
         children: [
-          Container(
+          widget.editing ? Container(
             alignment: Alignment.center,
             height: _screenUtil.setHeight(200),
             color: Colors.white,
             child: Text('Specify Your Address Location'),
-          ),
+          ) : Container(),
           Expanded(
             child: GoogleMap(
               onTap: (position) {
-                final marker = Marker(
-                  markerId: MarkerId('Address Location'),
-                  position: LatLng(position.latitude, position.longitude),
-                  infoWindow: InfoWindow(
-                    title: 'Address Location',
-                    snippet: widget.address,
-                  ),
-                );
-                setState(() {
-                  _markers['Address Location'] = marker;
-                });
+                if (widget.editing) {
+                  final marker = Marker(
+                    markerId: MarkerId('Address Location'),
+                    position: LatLng(position.latitude, position.longitude),
+                    infoWindow: InfoWindow(
+                      title: 'Address Location',
+                      snippet: widget.address,
+                    ),
+
+                  );
+                  setState(() {
+                    _markers['Address Location'] = marker;
+                  });
+                  if (widget.onLocationSpecifiedOnMap != null) {
+                    widget.onLocationSpecifiedOnMap(
+                        position.latitude, position.longitude);
+                  }
+                }
               },
               mapType: MapType.normal,
               initialCameraPosition: CameraPosition(

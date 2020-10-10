@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:t3t3/view/ui/home_pages/profile_pages/country_list.dart';
+import 'package:t3t3/view/ui/home_pages/profile_pages/location_map.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
+import 'package:toast/toast.dart';
 
 import '../../custom_show_dialog.dart';
 
@@ -24,9 +27,14 @@ class _AddAddressState extends State<AddAddress> {
 
   String _country;
 
+  double _latitude;
+  double _longitude;
+
   @override
   void initState() {
     _country = '';
+    _latitude = 0.0;
+    _longitude = 0.0;
     super.initState();
   }
 
@@ -149,6 +157,62 @@ class _AddAddressState extends State<AddAddress> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(_screenUtil.setWidth(30)),
+                  child: GestureDetector(
+                    onTap: () async {
+                      if (_line1Controller.text.isEmpty) {
+                        Toast.show(
+                            "Specify the address first (Fill at least the line 1 of the address",
+                            context,
+                            duration: Toast.LENGTH_LONG,
+                            gravity: Toast.BOTTOM);
+                        return;
+                      }
+
+                      Position position = await getCurrentPosition(
+                          desiredAccuracy: LocationAccuracy.high);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LocationMap(
+                                address:
+                                    '${_line1Controller.text}\n${_line2Controller.text}',
+                                latitude: position.latitude,
+                                longitude: position.longitude,
+                                onLocationSpecifiedOnMap: (lat, lon) {
+                                  setState(() {
+                                    _latitude = lat;
+                                    _longitude = lon;
+                                  });
+                                  print('Latitude: $_latitude');
+                                  print('Longitude: $_longitude');
+                                },
+                                editing: true,
+                              )));
+                    },
+                    child: Container(
+                      height: _screenUtil.setHeight(100),
+                      decoration: BoxDecoration(
+                        color: Color(0xfff4f4f8),
+                        borderRadius:
+                            BorderRadius.circular(_screenUtil.setWidth(30)),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        _latitude > 0 && _longitude > 0
+                            ? '$_latitude, $_longitude'
+                            : 'Specify Address Location',
+                        style: TextStyle(
+                          fontSize: _latitude > 0 && _longitude > 0
+                              ? _screenUtil.setSp(37)
+                              : _screenUtil.setSp(50),
+                          color: _latitude > 0 && _longitude > 0
+                              ? Colors.black
+                              : Color(0xffd9d9d9),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(_screenUtil.setWidth(30)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -163,6 +227,8 @@ class _AddAddressState extends State<AddAddress> {
                               'state': _stateController.text,
                               'country': _country,
                               'zipPostalCode': _poController.text,
+                              'latitude': '$_latitude',
+                              'longitude': '$_longitude',
                             };
                             widget.onAddressAdded(data);
                             Navigator.of(context).pop();

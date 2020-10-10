@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t3t3/view/bloc/home_page/bloc.dart';
+import 'package:t3t3/view/ui/home_pages/register_as_a_merchant_page.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
 
 import 'home_pages/cart_page.dart';
@@ -118,6 +119,15 @@ class Home extends StatelessWidget {
                             ),
                             ListTile(
                               onTap: () {
+                                BlocProvider.of<HomePageBloc>(context).add(
+                                    NavigateToRegistrationAsAMerchantPage());
+                                Navigator.of(context).pop();
+                              },
+                              title: _drawerItem(context, Icons.business_center,
+                                  'Login As a Merchant'),
+                            ),
+                            ListTile(
+                              onTap: () {
                                 BlocProvider.of<HomePageBloc>(context)
                                     .add(NavigateToStorePage());
                                 Navigator.of(context).pop();
@@ -173,17 +183,22 @@ class Home extends StatelessWidget {
                                 )
                               : state is StorePageState
                                   ? Center(
-                                      child: StorePage(),
-                                    )
-                                  : state is WishListState
-                                      ? Center(
-                                          child: WishListPage(),
-                                        )
-                                      : state is CartPageState
-                                          ? Center(
-                                              child: CartPage(),
-                                            )
-                                          : HomePage(),
+                child: StorePage(),
+              )
+                  : state is WishListState
+                  ? Center(
+                child: WishListPage(),
+              )
+                  : state is CartPageState
+                  ? Center(
+                child: CartPage(),
+              )
+                  : state is RegisterAsAMerchantPageState
+                  ? Center(
+                child:
+                RegisterAsAMerchantPage(),
+              )
+                  : HomePage(),
             );
           },
         ),
@@ -196,17 +211,17 @@ class Home extends StatelessWidget {
     return Row(
       children: <Widget>[
         Flexible(
+          flex: 1,
           child: Icon(
             icon,
             color: Color(0xff9b7448),
           ),
         ),
-        Flexible(
-          child: Padding(
-            padding: EdgeInsets.all(_screenUtil.setWidth(30)),
-          ),
+        SizedBox(
+          width: _screenUtil.setWidth(20),
         ),
         Flexible(
+          flex: 5,
           child: Text(
             title,
             style: TextStyle(
