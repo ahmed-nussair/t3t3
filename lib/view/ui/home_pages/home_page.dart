@@ -115,8 +115,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: Text(
                     '${_categories[index]}',
                     style: TextStyle(
-                      color: Colors.black,
-                    ),
+                      fontSize: _screenUtil.setSp(35),
+                  color: Colors.black,
+                ),
                   ),
                 );
               }),
@@ -154,7 +155,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           _subCategories[index]['imageUrl'],),
                                       ) :
                                       DecorationImage(
-                                        scale: _screenUtil.setWidth(20),
+                                        scale: _screenUtil.setWidth(10),
                                         image: AssetImage(
                                           _subCategories[index]['imageUrl'],),
                                       ),
