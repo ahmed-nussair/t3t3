@@ -20,3 +20,5 @@ class WishListState extends HomePageState {}
 class CartPageState extends HomePageState {}
 
 class RegisterAsAMerchantPageState extends HomePageState {}
+
+class LoginAsAMerchantPageState extends HomePageState {}

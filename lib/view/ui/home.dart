@@ -6,6 +6,7 @@ import 'package:t3t3/view/ui/screen_util.dart';
 
 import 'home_pages/cart_page.dart';
 import 'home_pages/home_page.dart';
+import 'home_pages/login_as_a_merchant_page.dart';
 import 'home_pages/products_page.dart';
 import 'home_pages/profile_page.dart';
 import 'home_pages/store_page.dart';
@@ -124,7 +125,7 @@ class Home extends StatelessWidget {
                           ListTile(
                             onTap: () {
                               BlocProvider.of<HomePageBloc>(context)
-                                  .add(NavigateToRegistrationAsAMerchantPage());
+                                  .add(NavigateToLoginAsAMerchantPage());
                               Navigator.of(context).pop();
                             },
                             title: _drawerItem(context, Icons.business_center,
@@ -162,6 +163,13 @@ class Home extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             title: _drawerItem(
+                                context, Icons.feedback, 'Feedback'),
+                          ),
+                          ListTile(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            title: _drawerItem(
                                 context, Icons.exit_to_app, 'Sign Out'),
                           ),
                         ],
@@ -186,7 +194,13 @@ class Home extends StatelessWidget {
                                 )
                               : state is StorePageState
                                   ? Center(
-                                      child: StorePage(),
+                                      child: StorePage(
+                                        onLoggingInAsAMerchant: () {
+                                          BlocProvider.of<HomePageBloc>(context)
+                                              .add(
+                                                  NavigateToLoginAsAMerchantPage());
+                                        },
+                                      ),
                                     )
                                   : state is WishListState
                                       ? Center(
@@ -197,11 +211,25 @@ class Home extends StatelessWidget {
                                               child: CartPage(),
                                             )
                                           : state is RegisterAsAMerchantPageState
-                  ? Center(
-                child:
-                RegisterAsAMerchantPage(),
-              )
-                  : HomePage(),
+                                              ? Center(
+                                                  child:
+                                                      RegisterAsAMerchantPage(),
+                                                )
+                                              : state is LoginAsAMerchantPageState
+                                                  ? Center(
+                                                      child:
+                                                          LoginAsAMerchantPage(
+                                                        onRegisteringAsAMerchant:
+                                                            () {
+                                                          BlocProvider.of<
+                                                                      HomePageBloc>(
+                                                                  context)
+                                                              .add(
+                                                                  NavigateToRegistrationAsAMerchantPage());
+                                                        },
+                                                      ),
+                                                    )
+                                                  : HomePage(),
             );
           },
         ),

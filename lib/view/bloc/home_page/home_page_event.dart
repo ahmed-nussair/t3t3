@@ -18,3 +18,5 @@ class NavigateToWishListPage extends HomePageEvent {}
 class NavigateToCartPage extends HomePageEvent {}
 
 class NavigateToRegistrationAsAMerchantPage extends HomePageEvent {}
+
+class NavigateToLoginAsAMerchantPage extends HomePageEvent {}

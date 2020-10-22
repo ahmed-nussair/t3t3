@@ -1,1 +1,3 @@
-class Globals {}
+class Globals {
+  static bool loggedInAsAMerchant = false;
+}

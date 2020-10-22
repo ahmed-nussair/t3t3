@@ -26,6 +26,8 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       yield CartPageState();
     } else if (event is NavigateToRegistrationAsAMerchantPage) {
       yield RegisterAsAMerchantPageState();
+    } else if (event is NavigateToLoginAsAMerchantPage) {
+      yield LoginAsAMerchantPageState();
     } else {
       yield MainPageState();
     }
