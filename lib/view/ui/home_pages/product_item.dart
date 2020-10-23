@@ -38,13 +38,13 @@ class _ProductItemState extends State<ProductItem> {
           Padding(
             padding: EdgeInsets.all(_screenUtil.setHeight(10)),
             child: Container(
-              height: _screenUtil.setHeight(80),
+              height: _screenUtil.setHeight(100),
               child: Text(
                 widget.title,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 style: TextStyle(
-                  fontSize: _screenUtil.setSp(30),
+                  fontSize: _screenUtil.setSp(40),
                 ),
                 overflow: TextOverflow.ellipsis, // so that text ends with dots
               ),
@@ -59,7 +59,7 @@ class _ProductItemState extends State<ProductItem> {
                     child: Text(
                       '${widget.price.toStringAsFixed(2)} \$',
                       style: TextStyle(
-                        fontSize: _screenUtil.setSp(30),
+                        fontSize: _screenUtil.setSp(40),
                       ),
                     ),
                   )
@@ -71,7 +71,7 @@ class _ProductItemState extends State<ProductItem> {
                         child: Text(
                           '${widget.afterDiscount.toStringAsFixed(2)} \$',
                           style: TextStyle(
-                            fontSize: _screenUtil.setSp(30),
+                            fontSize: _screenUtil.setSp(40),
                           ),
                         ),
                       ),
@@ -81,7 +81,7 @@ class _ProductItemState extends State<ProductItem> {
                           '${widget.price.toStringAsFixed(2)} \$',
                           style: TextStyle(
                             decoration: TextDecoration.lineThrough,
-                            fontSize: _screenUtil.setSp(30),
+                            fontSize: _screenUtil.setSp(40),
                           ),
                         ),
                       ),
@@ -99,7 +99,7 @@ class _ProductItemState extends State<ProductItem> {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 style: TextStyle(
-                  fontSize: _screenUtil.setSp(30),
+                  fontSize: _screenUtil.setSp(40),
                 ),
                 overflow: TextOverflow.ellipsis, // so that text ends with dots
               ),
