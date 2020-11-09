@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t3t3/view/bloc/home_page/bloc.dart';
+import 'package:t3t3/view/ui/home_pages/feedback_page.dart';
+import 'file:///D:/projects/flutter/t3t3/lib/view/ui/merchant_page.dart';
 import 'package:t3t3/view/ui/home_pages/register_as_a_merchant_page.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
 
@@ -160,6 +162,8 @@ class Home extends StatelessWidget {
                           ),
                           ListTile(
                             onTap: () {
+                              BlocProvider.of<HomePageBloc>(context)
+                                  .add(NavigateToFeedbackPage());
                               Navigator.of(context).pop();
                             },
                             title: _drawerItem(
@@ -206,30 +210,39 @@ class Home extends StatelessWidget {
                                       ? Center(
                                           child: WishListPage(),
                                         )
-                                      : state is CartPageState
+                                      : state is FeedbackPageState
                                           ? Center(
-                                              child: CartPage(),
+                                              child: FeedbackPage(),
                                             )
-                                          : state is RegisterAsAMerchantPageState
+                                          : state is CartPageState
                                               ? Center(
-                                                  child:
-                                                      RegisterAsAMerchantPage(),
+                                                  child: CartPage(),
                                                 )
-                                              : state is LoginAsAMerchantPageState
+                                              : state is RegisterAsAMerchantPageState
                                                   ? Center(
                                                       child:
-                                                          LoginAsAMerchantPage(
-                                                        onRegisteringAsAMerchant:
-                                                            () {
-                                                          BlocProvider.of<
-                                                                      HomePageBloc>(
-                                                                  context)
-                                                              .add(
-                                                                  NavigateToRegistrationAsAMerchantPage());
-                                                        },
-                                                      ),
+                                                          RegisterAsAMerchantPage(),
                                                     )
-                                                  : HomePage(),
+                                                  : state is LoginAsAMerchantPageState
+                                                      ? Center(
+                                                          child:
+                                                              LoginAsAMerchantPage(
+                                                            onRegisteringAsAMerchant:
+                                                                () {
+                                                              BlocProvider.of<
+                                                                          HomePageBloc>(
+                                                                      context)
+                                                                  .add(
+                                                                      NavigateToRegistrationAsAMerchantPage());
+                                                            },
+                                                          ),
+                                                        )
+                                                      : state is MerchantPageState
+                                                          ? Center(
+                                                              child:
+                                                                  MerchantPage(),
+                                                            )
+                                                          : HomePage(),
             );
           },
         ),

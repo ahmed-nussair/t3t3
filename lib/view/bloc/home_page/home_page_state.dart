@@ -22,3 +22,7 @@ class CartPageState extends HomePageState {}
 class RegisterAsAMerchantPageState extends HomePageState {}
 
 class LoginAsAMerchantPageState extends HomePageState {}
+
+class MerchantPageState extends HomePageState {}
+
+class FeedbackPageState extends HomePageState {}

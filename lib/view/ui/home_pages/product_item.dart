@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../ui/merchant_page.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
 
 class ProductItem extends StatefulWidget {
@@ -7,11 +9,14 @@ class ProductItem extends StatefulWidget {
   final double price;
   final double afterDiscount;
 
+  // final Function onMerchantNameTapped;
+
   ProductItem({
     @required this.imageUrl,
     @required this.title,
     @required this.price,
     @required this.afterDiscount,
+    // @required this.onMerchantNameTapped,
   });
 
   @override
@@ -55,38 +60,38 @@ class _ProductItemState extends State<ProductItem> {
             height: _screenUtil.setHeight(80),
             child: widget.price == widget.afterDiscount
                 ? Padding(
-                    padding: EdgeInsets.all(_screenUtil.setHeight(10)),
-                    child: Text(
-                      '${widget.price.toStringAsFixed(2)} \$',
-                      style: TextStyle(
-                        fontSize: _screenUtil.setSp(40),
-                      ),
-                    ),
-                  )
+              padding: EdgeInsets.all(_screenUtil.setHeight(10)),
+              child: Text(
+                '${widget.price.toStringAsFixed(2)} \$',
+                style: TextStyle(
+                  fontSize: _screenUtil.setSp(40),
+                ),
+              ),
+            )
                 : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(_screenUtil.setHeight(10)),
-                        child: Text(
-                          '${widget.afterDiscount.toStringAsFixed(2)} \$',
-                          style: TextStyle(
-                            fontSize: _screenUtil.setSp(40),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(_screenUtil.setHeight(10)),
-                        child: Text(
-                          '${widget.price.toStringAsFixed(2)} \$',
-                          style: TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                            fontSize: _screenUtil.setSp(40),
-                          ),
-                        ),
-                      ),
-                    ],
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(_screenUtil.setHeight(10)),
+                  child: Text(
+                    '${widget.afterDiscount.toStringAsFixed(2)} \$',
+                    style: TextStyle(
+                      fontSize: _screenUtil.setSp(40),
+                    ),
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(_screenUtil.setHeight(10)),
+                  child: Text(
+                    '${widget.price.toStringAsFixed(2)} \$',
+                    style: TextStyle(
+                      decoration: TextDecoration.lineThrough,
+                      fontSize: _screenUtil.setSp(40),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Divider(),
           Padding(
@@ -94,14 +99,28 @@ class _ProductItemState extends State<ProductItem> {
             child: Container(
               alignment: Alignment.centerLeft,
               height: _screenUtil.setHeight(80),
-              child: Text(
-                'Published by nussair',
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: _screenUtil.setSp(40),
-                ),
-                overflow: TextOverflow.ellipsis, // so that text ends with dots
+              child: RichText(
+                text: TextSpan(
+                    style: TextStyle(
+                      fontSize: _screenUtil.setSp(40),
+                      color: Colors.black,
+                    ),
+                    children: [
+                      TextSpan(text: 'Published by '),
+                      TextSpan(
+                        text: 'nussair',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // widget.onMerchantNameTapped();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MerchantPage()));
+                          },
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ]),
               ),
             ),
           ),

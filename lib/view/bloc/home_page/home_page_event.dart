@@ -20,3 +20,7 @@ class NavigateToCartPage extends HomePageEvent {}
 class NavigateToRegistrationAsAMerchantPage extends HomePageEvent {}
 
 class NavigateToLoginAsAMerchantPage extends HomePageEvent {}
+
+class NavigateToMerchantPage extends HomePageEvent {}
+
+class NavigateToFeedbackPage extends HomePageEvent {}

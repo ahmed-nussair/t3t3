@@ -76,6 +76,10 @@ List _products = [
 ];
 
 class HomePage extends StatefulWidget {
+  // final Function onMerchantNameTapped;
+
+  // HomePage({@required this.onMerchantNameTapped});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -189,6 +193,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               imageUrl: _products[index]['imageUrl'],
                               price: _products[index]['price'],
                               afterDiscount: _products[index]['afterDiscount'],
+                              // onMerchantNameTapped: widget.onMerchantNameTapped,
                             );
                           }),
                         ),
