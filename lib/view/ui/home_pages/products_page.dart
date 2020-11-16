@@ -17,21 +17,24 @@ List _products = [
     'title': 'Arduino',
     'price': 10,
     'afterDiscount': 5,
+    'rating': 4.5,
   },
   {
     'imageUrl':
-        'https://images-na.ssl-images-amazon.com/images/I/71x0iZ4kf0L._AC_SX466_.jpg',
+    'https://images-na.ssl-images-amazon.com/images/I/71x0iZ4kf0L._AC_SX466_.jpg',
     'title': 'Acer G246HL Abd 24-Inch Screen LED-Lit Monitor',
     'price': 100,
     'afterDiscount': 100,
+    'rating': 5.0,
   },
   {
     'imageUrl':
-        'https://images-na.ssl-images-amazon.com/images/I/613rFMwkvPL._AC_SL1500_.jpg',
+    'https://images-na.ssl-images-amazon.com/images/I/613rFMwkvPL._AC_SL1500_.jpg',
     'title':
-        'Wireless Switch Pro Controller Gamepad Joypad Remote Joystick for Nintendo Switch Console',
+    'Wireless Switch Pro Controller Gamepad Joypad Remote Joystick for Nintendo Switch Console',
     'price': 50,
     'afterDiscount': 45,
+    'rating': 4.1,
   },
 ];
 
@@ -96,6 +99,9 @@ class _ProductsPageState extends State<ProductsPage>
                 return ProductItem(
                   title: _products[index]['title'],
                   imageUrl: _products[index]['imageUrl'],
+                  afterDiscount: _products[index]['afterDiscount'],
+                  price: _products[index]['price'],
+                  rating: _products[index]['rating'],
                 );
               }),
             );

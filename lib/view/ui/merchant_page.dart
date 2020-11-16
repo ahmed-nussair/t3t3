@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'merchant_pages/merchant_info_page.dart';
+import 'merchant_pages/merchant_location.dart';
 import 'merchant_pages/merchant_main_page.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
 import 'merchant_pages/merchant_contact_page.dart';
@@ -16,7 +16,7 @@ class _MerchantPageState extends State<MerchantPage> {
 
   final int contactIndex = 2;
   final int mainIndex = 1;
-  final int infoIndex = 0;
+  final int locationIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +160,9 @@ class _MerchantPageState extends State<MerchantPage> {
                   ? MerchantMainPage()
                   : _index == contactIndex
                       ? MerchantContactPage()
-                      : _index == infoIndex ? MerchantInfoPage() : Container(),
+                      : _index == locationIndex
+                          ? MerchantLocation()
+                          : Container(),
             ),
           ],
         ),
@@ -174,47 +176,18 @@ class _MerchantPageState extends State<MerchantPage> {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              title: Text('Categories'),
+              icon: Icon(Icons.location_pin),
+              label: 'Location',
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text('Main')),
+              icon: Icon(Icons.home), label: 'Main',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.chat), title: Text('Contact')),
+              icon: Icon(Icons.chat), label: 'Contact',
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-List _products = [
-  {
-    'imageUrl':
-        'https://eg.jumia.is/HAdJcMrGb7POd8ZFbmLk4VYkJcg=/fit-in/220x220/filters:fill(white)/product/62/337611/1.jpg',
-    'title': 'Arduino',
-    'price': 10.0,
-    'afterDiscount': 5.0,
-    'category': 'Electronics',
-    'subCategory': 'Accessories',
-  },
-  {
-    'imageUrl':
-        'https://images-na.ssl-images-amazon.com/images/I/71x0iZ4kf0L._AC_SX466_.jpg',
-    'title': 'Acer G246HL Abd 24-Inch Screen LED-Lit Monitor',
-    'price': 100.0,
-    'afterDiscount': 100.0,
-    'category': 'Electronics',
-    'subCategory': 'Screens',
-  },
-  {
-    'imageUrl':
-        'https://images-na.ssl-images-amazon.com/images/I/613rFMwkvPL._AC_SL1500_.jpg',
-    'title':
-        'Wireless Switch Pro Controller Gamepad Joypad Remote Joystick for Nintendo Switch Console',
-    'price': 50.0,
-    'afterDiscount': 45.0,
-    'category': 'Electronics',
-    'subCategory': 'Gaming',
-  },
-];

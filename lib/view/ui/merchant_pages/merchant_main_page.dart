@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/all_products.dart';
 import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/main_page.dart';
-import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/merchant_location.dart';
 import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/new_products.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
 
@@ -22,7 +21,7 @@ class _MerchantMainPageState extends State<MerchantMainPage>
   void initState() {
     _tabController = TabController(
       vsync: this,
-      length: 4,
+      length: 3,
       initialIndex: _currentTabIndex,
     );
     super.initState();
@@ -34,7 +33,6 @@ class _MerchantMainPageState extends State<MerchantMainPage>
 
     return Scaffold(
       appBar: TabBar(
-        isScrollable: true,
         controller: _tabController,
         tabs: [
           Tab(
@@ -64,15 +62,6 @@ class _MerchantMainPageState extends State<MerchantMainPage>
               ),
             ),
           ),
-          Tab(
-            child: Text(
-              'Location',
-              style: TextStyle(
-                fontSize: _screenUtil.setSp(35),
-                color: Colors.black,
-              ),
-            ),
-          ),
         ],
       ),
       body: TabBarView(
@@ -82,7 +71,6 @@ class _MerchantMainPageState extends State<MerchantMainPage>
           MainPage(),
           AllProducts(),
           NewProducts(),
-          MerchantLocation(),
         ],
       ),
     );

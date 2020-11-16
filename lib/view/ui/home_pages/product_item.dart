@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../ui/merchant_page.dart';
 import 'package:t3t3/view/ui/screen_util.dart';
 
@@ -8,6 +9,7 @@ class ProductItem extends StatefulWidget {
   final String title;
   final double price;
   final double afterDiscount;
+  final double rating;
 
   // final Function onMerchantNameTapped;
 
@@ -16,6 +18,7 @@ class ProductItem extends StatefulWidget {
     @required this.title,
     @required this.price,
     @required this.afterDiscount,
+    @required this.rating,
     // @required this.onMerchantNameTapped,
   });
 
@@ -83,45 +86,76 @@ class _ProductItemState extends State<ProductItem> {
                 Padding(
                   padding: EdgeInsets.all(_screenUtil.setHeight(10)),
                   child: Text(
-                    '${widget.price.toStringAsFixed(2)} \$',
-                    style: TextStyle(
-                      decoration: TextDecoration.lineThrough,
-                      fontSize: _screenUtil.setSp(40),
-                    ),
+                          '${widget.price.toStringAsFixed(2)} \$',
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            fontSize: _screenUtil.setSp(40),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+          ),
+          Divider(),
+          Container(
+            height: _screenUtil.setHeight(80),
+            child: RatingBarIndicator(
+              rating: widget.rating,
+              itemBuilder: (context, index) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              itemCount: 5,
+              itemSize: 30.0,
+              direction: Axis.horizontal,
             ),
           ),
           Divider(),
           Padding(
             padding: EdgeInsets.all(_screenUtil.setHeight(10)),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              height: _screenUtil.setHeight(80),
-              child: RichText(
-                text: TextSpan(
-                    style: TextStyle(
-                      fontSize: _screenUtil.setSp(40),
-                      color: Colors.black,
-                    ),
-                    children: [
-                      TextSpan(text: 'Published by '),
-                      TextSpan(
-                        text: 'nussair',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            // widget.onMerchantNameTapped();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MerchantPage()));
-                          },
-                        style: TextStyle(
-                          color: Colors.blueAccent,
-                          decoration: TextDecoration.underline,
-                        ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                    flex: 5,
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      height: _screenUtil.setHeight(80),
+                      child: RichText(
+                        maxLines: 1,
+                        text: TextSpan(
+                            style: TextStyle(
+                              fontSize: _screenUtil.setSp(40),
+                              color: Colors.black,
+                            ),
+                            children: [
+                              TextSpan(text: 'Published by '),
+                              TextSpan(
+                                text: 'nussair',
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    // widget.onMerchantNameTapped();
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MerchantPage()));
+                                  },
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ]),
                       ),
-                    ]),
-              ),
+                    )),
+                Flexible(
+                  flex: 1,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/person.png'),
+                    radius: _screenUtil.setWidth(30),
+                  ),
+                )
+              ],
             ),
           ),
         ],
