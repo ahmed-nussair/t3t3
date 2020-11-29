@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'screen_util.dart';
 
 class CountryCode extends StatefulWidget {
-  final Function(String) onCountryCodeSelected;
+  final Function(String, String) onCountryCodeSelected;
 
   CountryCode({@required this.onCountryCodeSelected});
 
@@ -89,7 +89,8 @@ class _CountryCodeState extends State<CountryCode> {
   Widget _countryCodeItem(int index) {
     return GestureDetector(
       onTap: () {
-        widget.onCountryCodeSelected('+${_list[index]['code']}');
+        widget.onCountryCodeSelected(
+            '${_list[index]['name']}', '+${_list[index]['code']}');
         Navigator.of(context).pop();
       },
       child: Column(

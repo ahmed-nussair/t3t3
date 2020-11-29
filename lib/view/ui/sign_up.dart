@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'country_code.dart';
 import 'custom_show_dialog.dart';
@@ -15,14 +18,34 @@ class _SignUpState extends State<SignUp> {
 
   final _screenUtil = ScreenUtil();
 
+  String _countryName;
   String _countryCode;
 
   bool _signingUp;
 
+  Gender _gender;
+
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
   @override
   void initState() {
+    _countryName = '';
     _countryCode = '+962';
     _signingUp = false;
+    _gender = Gender.Male;
     super.initState();
   }
 
@@ -49,14 +72,55 @@ class _SignUpState extends State<SignUp> {
                   key: _formKey,
                   child: ListView(
                     children: <Widget>[
-                      ClipRRect(
-                        child: Image.asset(
-                          'assets/person.png',
-                          width: _screenUtil.setWidth(150),
-                          height: _screenUtil.setWidth(150),
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(_screenUtil.setWidth(100))),
+                      // Upload photo
+                      Row(
+                        children: [
+                          ClipRRect(
+                            child: CircleAvatar(
+                              child: _image == null
+                                  ? Image.asset(
+                                      'assets/person.png',
+                                      width: _screenUtil.setWidth(150),
+                                      height: _screenUtil.setWidth(150),
+                                    )
+                                  : Image.file(
+                                      _image,
+                                      width: _screenUtil.setWidth(150),
+                                      height: _screenUtil.setWidth(150),
+                                    ),
+                              radius: _screenUtil.setWidth(100),
+                              backgroundColor: Color(0xfff4f4f8),
+                            ),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(_screenUtil.setWidth(100))),
+                          ),
+                          SizedBox(
+                            width: _screenUtil.setWidth(50),
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              final pickedFile = await picker.getImage(
+                                  source: ImageSource.gallery);
+
+                              setState(() {
+                                if (pickedFile != null) {
+                                  _image = File(pickedFile.path);
+                                } else {
+                                  print('No image selected.');
+                                }
+                              });
+                            },
+                            child: Text(
+                              'Upload A Photo',
+                              style: TextStyle(
+                                fontSize: _screenUtil.setSp(40),
+                                decoration: TextDecoration.underline,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
                       ),
 
                       // Username
@@ -117,6 +181,82 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
 
+                      // Gender
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: _screenUtil.setWidth(30),
+                            left: _screenUtil.setWidth(30),
+                            top: _screenUtil.setWidth(20),
+                            bottom: _screenUtil.setWidth(20)),
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          height: _screenUtil.setHeight(120),
+                          padding: EdgeInsets.all(_screenUtil.setWidth(28)),
+                          decoration: BoxDecoration(
+                            color: Color(0xfff4f4f8),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(_screenUtil.setWidth(30))),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.wc,
+                                color: Color(0xffd9d9d9),
+                                size: _screenUtil.setSp(50),
+                              ),
+                              SizedBox(
+                                width: _screenUtil.setWidth(40),
+                              ),
+                              Text(
+                                'Your Gender: ',
+                                style: TextStyle(
+                                  fontSize: _screenUtil.setSp(40),
+                                  color: Color(0xffd8cfcc),
+                                ),
+                              ),
+
+                              Radio(
+                                groupValue: _gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _gender = value;
+                                  });
+                                },
+                                value: Gender.Male,
+                              ),
+                              Text(
+                                'Male',
+                                style: TextStyle(
+                                  fontSize: _screenUtil.setSp(40),
+                                  color: Color(0xffd8cfcc),
+                                ),
+                              ),
+                              Radio(
+                                groupValue: _gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _gender = value;
+                                  });
+                                },
+                                value: Gender.Female,
+                              ),
+                              Text(
+                                'Female',
+                                style: TextStyle(
+                                  fontSize: _screenUtil.setSp(40),
+                                  color: Color(0xffd8cfcc),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // country
                       Padding(
                         padding: EdgeInsets.only(
                             right: _screenUtil.setWidth(30),
@@ -131,8 +271,10 @@ class _SignUpState extends State<SignUp> {
                                 titlePadding: EdgeInsets.all(0.0),
                                 contentPadding: EdgeInsets.all(0.0),
                                 content: CountryCode(
-                                  onCountryCodeSelected: (countryCode) {
+                                  onCountryCodeSelected: (countryName,
+                                      countryCode) {
                                     setState(() {
+                                      _countryName = countryName;
                                       _countryCode = countryCode;
                                     });
                                   },
@@ -151,7 +293,9 @@ class _SignUpState extends State<SignUp> {
                                   Radius.circular(_screenUtil.setWidth(30))),
                             ),
                             child: Text(
-                              'Select Your Country',
+                              _countryName.isEmpty
+                                  ? 'Select Your Country'
+                                  : _countryName,
                               style: TextStyle(
                                 fontSize: _screenUtil.setSp(40),
                                 color: Color(0xffd8cfcc),
@@ -173,41 +317,23 @@ class _SignUpState extends State<SignUp> {
                             // country code
                             Flexible(
                               flex: 1,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    child: CustomAlertDialog(
-                                      titlePadding: EdgeInsets.all(0.0),
-                                      contentPadding: EdgeInsets.all(0.0),
-                                      content: CountryCode(
-                                        onCountryCodeSelected: (countryCode) {
-                                          setState(() {
-                                            _countryCode = countryCode;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: _screenUtil.setWidth(800),
-                                  height: _screenUtil.setHeight(120),
-                                  padding:
-                                  EdgeInsets.all(_screenUtil.setHeight(25)),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xfff4f4f8),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                            _screenUtil.setWidth(30))),
-                                  ),
-                                  child: Text(
-                                    _countryCode,
-                                    style: TextStyle(
-                                      fontSize: _screenUtil.setSp(40),
-                                      color: Color(0xffd8cfcc),
-                                    ),
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: _screenUtil.setWidth(800),
+                                height: _screenUtil.setHeight(120),
+                                padding:
+                                EdgeInsets.all(_screenUtil.setHeight(25)),
+                                decoration: BoxDecoration(
+                                  color: Color(0xfff4f4f8),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          _screenUtil.setWidth(30))),
+                                ),
+                                child: Text(
+                                  _countryCode,
+                                  style: TextStyle(
+                                    fontSize: _screenUtil.setSp(40),
+                                    color: Color(0xffd8cfcc),
                                   ),
                                 ),
                               ),
@@ -305,23 +431,23 @@ class _SignUpState extends State<SignUp> {
                 ),
               ],
             ),
-            bottomNavigationBar: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Container(
-                padding: EdgeInsets.all(_screenUtil.setWidth(50)),
-                color: Color(0xff9b7448),
-                child: Text(
-                  'Back to login',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: _screenUtil.setWidth(50),
-                  ),
-                ),
-              ),
-            ),
+            // bottomNavigationBar: GestureDetector(
+            //   onTap: () {
+            //     Navigator.of(context).pop();
+            //   },
+            //   child: Container(
+            //     padding: EdgeInsets.all(_screenUtil.setWidth(50)),
+            //     color: Color(0xff9b7448),
+            //     child: Text(
+            //       'Back to login',
+            //       textAlign: TextAlign.center,
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: _screenUtil.setWidth(50),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ),
           _signingUp
               ? Positioned(
@@ -400,4 +526,9 @@ class _SignUpState extends State<SignUp> {
       ],
     );
   }
+}
+
+enum Gender {
+  Male,
+  Female,
 }
