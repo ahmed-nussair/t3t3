@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'country_code.dart';
@@ -48,9 +49,14 @@ class _SignUpState extends State<SignUp> {
                   key: _formKey,
                   child: ListView(
                     children: <Widget>[
-                      Image.asset(
-                        'assets/logo.png',
-                        height: _screenUtil.setHeight(300),
+                      ClipRRect(
+                        child: Image.asset(
+                          'assets/person.png',
+                          width: _screenUtil.setWidth(150),
+                          height: _screenUtil.setWidth(150),
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(_screenUtil.setWidth(100))),
                       ),
 
                       // Username
@@ -64,10 +70,10 @@ class _SignUpState extends State<SignUp> {
                           children: <Widget>[
                             Flexible(
                                 child: _formField(
-                              'First Name',
-                              Icons.person,
-                              controller: _firstNameController,
-                            )),
+                                  'First Name',
+                                  Icons.person,
+                                  controller: _firstNameController,
+                                )),
                             Padding(
                               padding: EdgeInsets.all(_screenUtil.setWidth(20)),
                             ),
@@ -189,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                                   width: _screenUtil.setWidth(800),
                                   height: _screenUtil.setHeight(120),
                                   padding:
-                                      EdgeInsets.all(_screenUtil.setHeight(25)),
+                                  EdgeInsets.all(_screenUtil.setHeight(25)),
                                   decoration: BoxDecoration(
                                     color: Color(0xfff4f4f8),
                                     borderRadius: BorderRadius.all(
@@ -319,27 +325,27 @@ class _SignUpState extends State<SignUp> {
           ),
           _signingUp
               ? Positioned(
-                  top: 0.0,
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.black.withOpacity(0.2),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: _screenUtil.setWidth(200),
-                          height: _screenUtil.setWidth(200),
-                          child: CircularProgressIndicator(
-                            strokeWidth: _screenUtil.setSp(20),
-                          ),
-                        ),
-                      ],
+            top: 0.0,
+            bottom: 0.0,
+            left: 0.0,
+            right: 0.0,
+            child: Container(
+              alignment: Alignment.center,
+              color: Colors.black.withOpacity(0.2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: _screenUtil.setWidth(200),
+                    height: _screenUtil.setWidth(200),
+                    child: CircularProgressIndicator(
+                      strokeWidth: _screenUtil.setSp(20),
                     ),
                   ),
-                )
+                ],
+              ),
+            ),
+          )
               : Container(),
         ],
       ),
@@ -348,8 +354,8 @@ class _SignUpState extends State<SignUp> {
 
   Widget _formField(String hintTitle, IconData icon,
       {@required final TextEditingController controller,
-      final bool obscureText = false,
-      final TextInputType inputType = TextInputType.text}) {
+        final bool obscureText = false,
+        final TextInputType inputType = TextInputType.text}) {
     return Stack(
       children: [
         Container(
@@ -362,7 +368,7 @@ class _SignUpState extends State<SignUp> {
               filled: true,
               border: OutlineInputBorder(
                 borderRadius:
-                    BorderRadius.all(Radius.circular(_screenUtil.setWidth(30))),
+                BorderRadius.all(Radius.circular(_screenUtil.setWidth(30))),
                 borderSide: BorderSide.none,
               ),
               hintText: hintTitle,

@@ -91,7 +91,7 @@ class Home extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Flexible(
-                      flex: 1,
+                      flex: 2,
                       child: Image.asset(
                         'assets/logo.png',
                         height: MediaQuery.of(context).size.width / 3,
@@ -103,7 +103,7 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      flex: 4,
+                      flex: 8,
                       child: ListView(
                         children: <Widget>[
                           ListTile(
@@ -113,7 +113,7 @@ class Home extends StatelessWidget {
                               Navigator.of(context).pop();
                             },
                             title:
-                                _drawerItem(context, Icons.home, 'Main Page'),
+                            _drawerItem(context, Icons.home, 'Main Page'),
                           ),
                           ListTile(
                             onTap: () {
@@ -168,6 +168,25 @@ class Home extends StatelessWidget {
                             },
                             title: _drawerItem(
                                 context, Icons.feedback, 'Feedback'),
+                          ),
+                          ListTile(
+                            onTap: () {
+                              // BlocProvider.of<HomePageBloc>(context)
+                              //     .add(NavigateToFeedbackPage());
+                              Navigator.of(context).pop();
+                            },
+                            title: _drawerItem(
+                                context, Icons.widgets_outlined, 'Products'),
+                          ),
+                          ListTile(
+                            onTap: () {
+                              // BlocProvider.of<HomePageBloc>(context)
+                              //     .add(NavigateToFeedbackPage());
+                              Navigator.of(context).pop();
+                            },
+                            title: _drawerItem(
+                                context, Icons.supervisor_account_sharp,
+                                'Merchants'),
                           ),
                           ListTile(
                             onTap: () {
