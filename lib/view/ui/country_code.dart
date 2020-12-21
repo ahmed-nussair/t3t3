@@ -35,7 +35,7 @@ class _CountryCodeState extends State<CountryCode> {
                 topLeft: Radius.circular(ScreenUtil().setWidth(50)),
                 topRight: Radius.circular(ScreenUtil().setWidth(50)),
               ),
-              color: Color(0xff9b7448),
+              color: Colors.black26,
             ),
             child: Text(
               'Select Country Code',

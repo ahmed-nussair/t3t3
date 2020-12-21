@@ -20,6 +20,8 @@ class _SignUpState extends State<SignUp> {
 
   String _countryName;
   String _countryCode;
+  double _latitude;
+  double _longitude;
 
   bool _signingUp;
 
@@ -46,6 +48,8 @@ class _SignUpState extends State<SignUp> {
     _countryCode = '+962';
     _signingUp = false;
     _gender = Gender.Male;
+    _latitude = 0;
+    _longitude = 0;
     super.initState();
   }
 
@@ -134,10 +138,10 @@ class _SignUpState extends State<SignUp> {
                           children: <Widget>[
                             Flexible(
                                 child: _formField(
-                                  'First Name',
-                                  Icons.person,
-                                  controller: _firstNameController,
-                                )),
+                              'First Name',
+                              Icons.person,
+                              controller: _firstNameController,
+                            )),
                             Padding(
                               padding: EdgeInsets.all(_screenUtil.setWidth(20)),
                             ),
@@ -218,7 +222,6 @@ class _SignUpState extends State<SignUp> {
                                   color: Color(0xffd8cfcc),
                                 ),
                               ),
-
                               Radio(
                                 groupValue: _gender,
                                 onChanged: (value) {
@@ -271,8 +274,8 @@ class _SignUpState extends State<SignUp> {
                                 titlePadding: EdgeInsets.all(0.0),
                                 contentPadding: EdgeInsets.all(0.0),
                                 content: CountryCode(
-                                  onCountryCodeSelected: (countryName,
-                                      countryCode) {
+                                  onCountryCodeSelected:
+                                      (countryName, countryCode) {
                                     setState(() {
                                       _countryName = countryName;
                                       _countryCode = countryCode;
@@ -282,25 +285,95 @@ class _SignUpState extends State<SignUp> {
                               ),
                             );
                           },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width,
-                            height: _screenUtil.setHeight(120),
-                            padding: EdgeInsets.all(_screenUtil.setWidth(28)),
-                            decoration: BoxDecoration(
-                              color: Color(0xfff4f4f8),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(_screenUtil.setWidth(30))),
-                            ),
-                            child: Text(
-                              _countryName.isEmpty
-                                  ? 'Select Your Country'
-                                  : _countryName,
-                              style: TextStyle(
-                                fontSize: _screenUtil.setSp(40),
-                                color: Color(0xffd8cfcc),
+                          child: Stack(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
+                                height: _screenUtil.setHeight(120),
+                                padding:
+                                EdgeInsets.all(_screenUtil.setWidth(28)),
+                                decoration: BoxDecoration(
+                                  color: Color(0xfff4f4f8),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          _screenUtil.setWidth(30))),
+                                ),
+                                child: Text(
+                                  _countryName.isEmpty
+                                      ? 'Select Your Country'
+                                      : _countryName,
+                                  style: TextStyle(
+                                    fontSize: _screenUtil.setSp(40),
+                                    color: Color(0xffd8cfcc),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Positioned(
+                                top: 0.0,
+                                bottom: 0.0,
+                                left: _screenUtil.setWidth(20),
+                                child: Icon(
+                                  Icons.flag,
+                                  color: Color(0xffd8cfcc),
+                                  size: _screenUtil.setSp(50),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // Google map location
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: _screenUtil.setWidth(30),
+                            left: _screenUtil.setWidth(30),
+                            top: _screenUtil.setWidth(20),
+                            bottom: _screenUtil.setWidth(20)),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Stack(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
+                                height: _screenUtil.setHeight(120),
+                                padding:
+                                EdgeInsets.all(_screenUtil.setWidth(28)),
+                                decoration: BoxDecoration(
+                                  color: Color(0xfff4f4f8),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          _screenUtil.setWidth(30))),
+                                ),
+                                child: Text(
+                                  _latitude == 0 && _longitude == 0
+                                      ? 'Specify Your Location on Google Map'
+                                      : '$_latitude, $_longitude',
+                                  style: TextStyle(
+                                    fontSize: _screenUtil.setSp(40),
+                                    color: Color(0xffd8cfcc),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0.0,
+                                bottom: 0.0,
+                                left: _screenUtil.setWidth(20),
+                                child: Icon(
+                                  Icons.location_pin,
+                                  color: Color(0xffd8cfcc),
+                                  size: _screenUtil.setSp(50),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -400,7 +473,7 @@ class _SignUpState extends State<SignUp> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(
                                   Radius.circular(_screenUtil.setHeight(30))),
-                              color: Color(0xff9b7448),
+                              color: Colors.black26,
                             ),
                             child: Text(
                               'Sign Up',

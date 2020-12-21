@@ -53,7 +53,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(_screenUtil.setHeight(30))),
-                                color: Color(0xff9b7448),
+                                color: Colors.black26,
                               ),
                               child: Text(
                                 'Recover Your Password',

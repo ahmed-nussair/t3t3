@@ -29,60 +29,85 @@ class Home extends StatelessWidget {
             return Scaffold(
               key: _key,
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(_screenUtil.setHeight(150)),
-                child: AppBar(
-                  backgroundColor: Color(0xff9b7448),
-                  centerTitle: true,
-                  title: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                          ),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Search For a Product',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xff6a6a6a),
-                                ),
-                              ),
-                              Positioned(
-                                right: 0.0,
-                                bottom: 0.0,
-                                top: 0.0,
-                                child: Icon(
-                                  Icons.search,
-                                  color: Color(0xff6a6a6a),
-                                ),
-                              ),
-                            ],
-                          ),
+                preferredSize: Size.fromHeight(_screenUtil.setHeight(300)),
+                child: Container(
+                  color: Colors.black26,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(_screenUtil.setWidth(30)),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Color(0x55000000),
+                              radius: _screenUtil.setWidth(50),
+                              backgroundImage: AssetImage('assets/person.png'),
+                            ),
+                            SizedBox(
+                              width: _screenUtil.setWidth(50),
+                            ),
+                            Text(
+                              'Hello, ahmed_nussair',
+                              style: TextStyle(fontSize: _screenUtil.setSp(40)),
+                            ),
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(_screenUtil.setWidth(20)),
-                        child: Icon(
-                          Icons.camera_alt,
-                          size: _screenUtil.setSp(70),
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(_screenUtil.setWidth(20)),
+                            child: GestureDetector(
+                                onTap: () {
+                                  _key.currentState.openDrawer();
+                                },
+                                child: Icon(
+                                  Icons.dehaze,
+                                  size: _screenUtil.setSp(70),
+                                )),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                              ),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Search For a Product',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xff6a6a6a),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: 0.0,
+                                    bottom: 0.0,
+                                    top: 0.0,
+                                    child: Icon(
+                                      Icons.search,
+                                      color: Color(0xff6a6a6a),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(_screenUtil.setWidth(20)),
+                            child: Icon(
+                              Icons.camera_alt,
+                              size: _screenUtil.setSp(70),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  leading: GestureDetector(
-                      onTap: () {
-                        _key.currentState.openDrawer();
-                      },
-                      child: Icon(
-                        Icons.dehaze,
-                        size: _screenUtil.setSp(70),
-                      )),
                 ),
               ),
               drawer: Container(
@@ -169,15 +194,15 @@ class Home extends StatelessWidget {
                             title: _drawerItem(
                                 context, Icons.feedback, 'Feedback'),
                           ),
-                          ListTile(
-                            onTap: () {
-                              // BlocProvider.of<HomePageBloc>(context)
-                              //     .add(NavigateToFeedbackPage());
-                              Navigator.of(context).pop();
-                            },
-                            title: _drawerItem(
-                                context, Icons.widgets_outlined, 'Products'),
-                          ),
+                          // ListTile(
+                          //   onTap: () {
+                          //     // BlocProvider.of<HomePageBloc>(context)
+                          //     //     .add(NavigateToFeedbackPage());
+                          //     Navigator.of(context).pop();
+                          //   },
+                          //   title: _drawerItem(
+                          //       context, Icons.widgets_outlined, 'Products'),
+                          // ),
                           ListTile(
                             onTap: () {
                               // BlocProvider.of<HomePageBloc>(context)
