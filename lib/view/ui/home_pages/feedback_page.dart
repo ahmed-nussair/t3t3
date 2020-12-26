@@ -32,6 +32,50 @@ class _FeedbackPageState extends State<FeedbackPage> {
             padding: EdgeInsets.all(_screenUtil.setHeight(50)),
             child: TextFormField(
               decoration: InputDecoration(
+                hintText: 'Name',
+                hintStyle: TextStyle(
+                  fontSize: _screenUtil.setSp(50),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(_screenUtil.setWidth(50)),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_screenUtil.setHeight(50)),
+            child: TextFormField(
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                hintText: 'Phone',
+                hintStyle: TextStyle(
+                  fontSize: _screenUtil.setSp(50),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(_screenUtil.setWidth(50)),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_screenUtil.setHeight(50)),
+            child: TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                hintText: 'Email',
+                hintStyle: TextStyle(
+                  fontSize: _screenUtil.setSp(50),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(_screenUtil.setWidth(50)),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(_screenUtil.setHeight(50)),
+            child: TextFormField(
+              decoration: InputDecoration(
                 hintText: 'Title',
                 hintStyle: TextStyle(
                   fontSize: _screenUtil.setSp(50),
@@ -64,7 +108,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
         onTap: () {},
         child: Container(
           padding: EdgeInsets.all(_screenUtil.setWidth(50)),
-          color: Color(0xff9b7448),
+          color: Colors.black26,
           child: Text(
             'Submit',
             textAlign: TextAlign.center,
