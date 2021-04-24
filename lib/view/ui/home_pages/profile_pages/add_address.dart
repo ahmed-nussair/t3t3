@@ -115,17 +115,19 @@ class _AddAddressState extends State<AddAddress> {
                     onTap: () {
                       showDialog(
                         context: context,
-                        child: CustomAlertDialog(
-                          titlePadding: EdgeInsets.all(0.0),
-                          contentPadding: EdgeInsets.all(0.0),
-                          content: CountryList(
-                            onCountryCodeSelected: (country) {
-                              setState(() {
-                                _country = country;
-                              });
-                            },
-                          ),
-                        ),
+                        builder: (context) {
+                          return CustomAlertDialog(
+                            titlePadding: EdgeInsets.all(0.0),
+                            contentPadding: EdgeInsets.all(0.0),
+                            content: CountryList(
+                              onCountryCodeSelected: (country) {
+                                setState(() {
+                                  _country = country;
+                                });
+                              },
+                            ),
+                          );
+                        },
                       );
                     },
                     child: Container(
@@ -168,7 +170,7 @@ class _AddAddressState extends State<AddAddress> {
                         return;
                       }
 
-                      Position position = await getCurrentPosition(
+                      Position position = await Geolocator.getCurrentPosition(
                           desiredAccuracy: LocationAccuracy.high);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LocationMap(
@@ -217,8 +219,8 @@ class _AddAddressState extends State<AddAddress> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
-                        child: RaisedButton(
-                          color: Color(0xff9b7448),
+                        child: ElevatedButton(
+                          // color: Color(0xff9b7448),
                           onPressed: () {
                             Map<String, String> data = {
                               'firstLine': _line1Controller.text,
@@ -247,8 +249,8 @@ class _AddAddressState extends State<AddAddress> {
                         width: _screenUtil.setWidth(30),
                       ),
                       Flexible(
-                        child: RaisedButton(
-                          color: Color(0xff9b7448),
+                        child: ElevatedButton(
+                          // color: Color(0xff9b7448),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

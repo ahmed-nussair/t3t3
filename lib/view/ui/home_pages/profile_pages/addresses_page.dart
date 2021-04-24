@@ -86,19 +86,21 @@ class _AddressesPageState extends State<AddressesPage> {
               onPressed: () {
                 showDialog(
                   context: context,
-                  child: CustomAlertDialog(
-                    titlePadding: EdgeInsets.all(0.0),
-                    contentPadding: EdgeInsets.all(0.0),
-                    content: AddAddress(
-                      onAddressAdded: (address) {
-                        List newList = _addressesList;
-                        newList.add(address);
-                        setState(() {
-                          _addressesList = newList;
-                        });
-                      },
-                    ),
-                  ),
+                  builder: (context) {
+                    return CustomAlertDialog(
+                      titlePadding: EdgeInsets.all(0.0),
+                      contentPadding: EdgeInsets.all(0.0),
+                      content: AddAddress(
+                        onAddressAdded: (address) {
+                          List newList = _addressesList;
+                          newList.add(address);
+                          setState(() {
+                            _addressesList = newList;
+                          });
+                        },
+                      ),
+                    );
+                  },
                 );
               },
               child: Icon(

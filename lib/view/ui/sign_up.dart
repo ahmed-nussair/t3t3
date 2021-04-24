@@ -270,19 +270,21 @@ class _SignUpState extends State<SignUp> {
                           onTap: () {
                             showDialog(
                               context: context,
-                              child: CustomAlertDialog(
-                                titlePadding: EdgeInsets.all(0.0),
-                                contentPadding: EdgeInsets.all(0.0),
-                                content: CountryCode(
-                                  onCountryCodeSelected:
-                                      (countryName, countryCode) {
-                                    setState(() {
-                                      _countryName = countryName;
-                                      _countryCode = countryCode;
-                                    });
-                                  },
-                                ),
-                              ),
+                              builder: (context) {
+                                return CustomAlertDialog(
+                                  titlePadding: EdgeInsets.all(0.0),
+                                  contentPadding: EdgeInsets.all(0.0),
+                                  content: CountryCode(
+                                    onCountryCodeSelected:
+                                        (countryName, countryCode) {
+                                      setState(() {
+                                        _countryName = countryName;
+                                        _countryCode = countryCode;
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
                             );
                           },
                           child: Stack(
