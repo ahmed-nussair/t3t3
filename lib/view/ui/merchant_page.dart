@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'merchant_pages/merchant_location.dart';
 import 'merchant_pages/merchant_main_page.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'screen_util.dart';
 import 'merchant_pages/merchant_contact_page.dart';
 
 class MerchantPage extends StatefulWidget {

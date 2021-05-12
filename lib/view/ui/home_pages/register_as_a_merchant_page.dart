@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'register_as_a_merchant_pages/merchant_address_and_location.dart';
 import 'register_as_a_merchant_pages/merchant_details.dart';
 import 'register_as_a_merchant_pages/merchant_payment_details.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import '../screen_util.dart';
 
 class RegisterAsAMerchantPage extends StatefulWidget {
   @override

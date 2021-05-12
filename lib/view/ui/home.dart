@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t3t3/view/bloc/home_page/bloc.dart';
-import 'package:t3t3/view/ui/home_pages/feedback_page.dart';
+import '../bloc/home_page/bloc.dart';
+import 'home_pages/feedback_page.dart';
 import 'merchant_page.dart';
-import 'package:t3t3/view/ui/home_pages/register_as_a_merchant_page.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'home_pages/register_as_a_merchant_page.dart';
+import 'screen_util.dart';
 
 import 'home_pages/cart_page.dart';
 import 'home_pages/home_page.dart';

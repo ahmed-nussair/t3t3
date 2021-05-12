@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:t3t3/view/ui/home_pages/profile_pages/location_map.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'location_map.dart';
+import '../../screen_util.dart';
 
 class AddressItem extends StatelessWidget {
   final String firstLine;

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import '../screen_util.dart';
 
 import 'product_item.dart';
 

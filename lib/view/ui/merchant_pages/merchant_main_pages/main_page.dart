@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/hot_offer_slider.dart';
-import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/recommended_slider.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'hot_offer_slider.dart';
+import 'recommended_slider.dart';
+import '../../screen_util.dart';
 
 class MainPage extends StatefulWidget {
   @override

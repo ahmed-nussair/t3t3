@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import '../../screen_util.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MerchantsAddressAndLocation extends StatefulWidget {

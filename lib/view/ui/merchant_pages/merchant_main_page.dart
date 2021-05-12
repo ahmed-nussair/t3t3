@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/all_products.dart';
-import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/main_page.dart';
-import 'package:t3t3/view/ui/merchant_pages/merchant_main_pages/new_products.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'merchant_main_pages/all_products.dart';
+import 'merchant_main_pages/main_page.dart';
+import 'merchant_main_pages/new_products.dart';
+import '../screen_util.dart';
 
 class MerchantMainPage extends StatefulWidget {
   @override

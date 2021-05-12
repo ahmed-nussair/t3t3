@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:t3t3/view/ui/home_pages/profile_pages/country_list.dart';
-import 'package:t3t3/view/ui/home_pages/profile_pages/location_map.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'country_list.dart';
+import 'location_map.dart';
+import '../../screen_util.dart';
 import 'package:toast/toast.dart';
 
 import '../../custom_show_dialog.dart';

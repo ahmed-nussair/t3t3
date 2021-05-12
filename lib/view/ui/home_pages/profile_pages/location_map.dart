@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import '../../screen_util.dart';
 
 class LocationMap extends StatefulWidget {
   final double latitude;
@@ -32,7 +32,7 @@ class _LocationMapState extends State<LocationMap> {
 
   _test() async {
     Position position =
-        await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
     print('${position.latitude}, ${position.longitude}');
   }

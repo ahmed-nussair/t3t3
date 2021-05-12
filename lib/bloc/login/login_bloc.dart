@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:t3t3/model/chopper/login_service.dart';
+import '../../model/chopper/login_service.dart';
 
 part 'login_event.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import '../../screen_util.dart';
 
 class MerchantProductItem extends StatefulWidget {
   final String imageUrl;

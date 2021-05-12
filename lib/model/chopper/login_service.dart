@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
-import 'package:t3t3/globals.dart';
-import 'package:t3t3/model/response/login.dart';
+import '../../globals.dart';
+import '../../model/response/login.dart';
 
 import 'json_to_type_converter.dart';
 

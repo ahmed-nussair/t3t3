@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:t3t3/bloc/login/login_bloc.dart';
-import 'package:t3t3/view/ui/screen_util.dart';
+import '../../bloc/login/login_bloc.dart';
+import 'screen_util.dart';
 
 import 'password_recovery.dart';
 import 'sign_up.dart';

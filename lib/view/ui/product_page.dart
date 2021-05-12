@@ -6,7 +6,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
-import 'package:t3t3/view/ui/screen_util.dart';
+import 'screen_util.dart';
 
 import 'merchant_page.dart';
 
@@ -455,7 +455,7 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<bool> _loadingImage(String url) async {
-    final response = await http.get(url);
+    final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       return true;
