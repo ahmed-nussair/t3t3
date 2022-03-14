@@ -5,6 +5,9 @@ import 'view/ui/home.dart';
 import 'view/ui/login.dart';
 import 'view/ui/splash.dart';
 
+/**
+ * This is just another branch
+ */
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
